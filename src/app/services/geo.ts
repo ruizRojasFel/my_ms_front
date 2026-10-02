@@ -13,7 +13,7 @@ export interface Comuna {
 @Injectable({ providedIn: 'root' })
 export class GeoService {
   private http = inject(HttpClient);
-  private baseUrl = 'https://api-geo-cl-3qbd.onrender.com/api/v1';
+  private baseUrl = 'https://serv-geo-cl-api.onrender.com/api/v1';
 
   getRegiones(): Observable<Region[]> {
     return this.http.get<Region[]>(`${this.baseUrl}/regiones`);
