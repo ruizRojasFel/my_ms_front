@@ -1,0 +1,39 @@
+<div class="min-h-screen bg-slate-50 flex items-center justify-center p-6">
+  <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md border border-slate-100">
+
+    <h2 class="text-2xl font-bold text-slate-800 mb-1">Ubicación</h2>
+    <p class="text-sm text-slate-500 mb-6">Complete los campos para continuar</p>
+
+    <!-- Región -->
+    <div class="mb-5">
+      <label class="block text-sm font-semibold text-slate-600 mb-1.5">
+        Seleccione su región
+      </label>
+      <select (change)="onRegionChange($event)"
+        class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+        <option value="">— Seleccione una región —</option>
+        @for (region of regiones(); track region.nombre) {
+        <option [value]="region.nombre">{{ region.nombre }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Comuna -->
+    <div>
+      <label class="block text-sm font-semibold text-slate-600 mb-1.5">
+        Seleccione su comuna
+      </label>
+      <select [disabled]="!regionSeleccionada()"
+        class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition disabled:opacity-50 disabled:cursor-not-allowed">
+        <option value="">— Seleccione una comuna —</option>
+        @if (cargandoComunas()) {
+        <option disabled>Cargando...</option>
+        }
+        @for (comuna of comunas(); track comuna.nombre) {
+        <option [value]="comuna.nombre">{{ comuna.nombre }}</option>
+        }
+      </select>
+    </div>
+
+  </div>
+</div>
