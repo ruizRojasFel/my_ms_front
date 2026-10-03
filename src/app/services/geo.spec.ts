@@ -1,16 +1,31 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 
-import { Geo } from './geo';
+import { GeoService } from './geo';
 
-describe('Geo', () => {
-  let service: Geo;
+describe('GeoService', () => {
+  const baseUrl = 'https://serv-geo-cl-api.onrender.com/api/v1';
+  let service: GeoService;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(Geo);
+    TestBed.configureTestingModule({
+      providers: [provideHttpClient(), provideHttpClientTesting()],
+    });
+    service = TestBed.inject(GeoService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  afterEach(() => httpMock.verify());
+
+  it('getRegiones consulta /regiones', () => {
+    service.getRegiones().subscribe();
+    httpMock.expectOne(`${baseUrl}/regiones`).flush([]);
+  });
+
+  it('getComunasPorRegion consulta /regiones/{id}/comunas', () => {
+    service.getComunasPorRegion(11).subscribe();
+    httpMock.expectOne(`${baseUrl}/regiones/11/comunas`).flush([]);
   });
 });

@@ -11,7 +11,7 @@ export class GeoSelectorComponent implements OnInit {
 
   regiones = signal<Region[]>([]);
   comunas = signal<Comuna[]>([]);
-  regionSeleccionada = signal<string>('');
+  regionSeleccionada = signal<number | null>(null);
   cargandoComunas = signal<boolean>(false);
 
   ngOnInit() {
@@ -22,14 +22,15 @@ export class GeoSelectorComponent implements OnInit {
   }
 
   onRegionChange(event: Event) {
-    const nombre = (event.target as HTMLSelectElement).value;
-    this.regionSeleccionada.set(nombre);
+    const value = (event.target as HTMLSelectElement).value;
+    const regionId = value ? Number(value) : null;
+    this.regionSeleccionada.set(regionId);
     this.comunas.set([]);
 
-    if (!nombre) return;
+    if (regionId === null) return;
 
     this.cargandoComunas.set(true);
-    this.geoService.getComunasPorRegion(nombre).subscribe({
+    this.geoService.getComunasPorRegion(regionId).subscribe({
       next: (data) => {
         this.comunas.set(data);
         this.cargandoComunas.set(false);
