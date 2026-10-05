@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { GeoSelectorComponent } from './components/geo-selector/geo-selector';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  template: `<app-geo-selector />`,
-  standalone: true,
-  imports: [GeoSelectorComponent]
+  imports: [RouterOutlet],
+  templateUrl: './app.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrl: './app.css',
 })
-export class AppComponent {}
+export class App {}

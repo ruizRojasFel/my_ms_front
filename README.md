@@ -12,7 +12,7 @@
 
 ## Descripción
 
-Aplicación frontend desarrollada con Angular 21 y Tailwind CSS que integra los microservicios del ecosistema de APIs. Actualmente consume **api-geo-cl** para ofrecer un selector dinámico de regiones y comunas de Chile. Está pensada para crecer e incorporar nuevas APIs como módulos independientes.
+Aplicación frontend desarrollada con Angular 22 y Tailwind CSS que integra los microservicios del ecosistema de APIs. Está pensada para crecer e incorporar nuevas APIs como módulos independientes.
 
 ## Development server
 
