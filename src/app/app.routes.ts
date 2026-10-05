@@ -8,6 +8,7 @@ export const routes: Routes = [
     component: MainLayout,
     children: [
       // aquí irán las demás features
+      { path: '', loadComponent: () => import('./features/home/pages/home/home').then(m => m.Home) }
     ],
   },
 ];
