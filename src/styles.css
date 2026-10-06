@@ -3,9 +3,17 @@
 @theme inline {
   /* Paleta */
   --color-primary: var(--primary);
-  --color-secondary: var(--secondary);
-  --color-tertiary: var(--tertiary);
+  --color-primary-foreground: var(--primary-foreground);
   --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+
+  /* Radios */
+  --radius-card: 1.125rem;
 
   /* Tipografía */
   --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue',
@@ -17,23 +25,48 @@
   color-scheme: light dark;
 
   --primary: #0071e3;
-  --secondary: #1d1d1f;
-  --tertiary: #f5f5f7;
+  --primary-foreground: #ffffff;
   --background: #ffffff;
+  --foreground: #1d1d1f;
+  --surface: #f5f5f7;
+  --muted: #6e6e73;
+  --border: #d2d2d7;
+  --danger: #e30000;
+  --success: #008009;
 }
 
 /* Modo oscuro (sigue la preferencia del sistema) */
 @media (prefers-color-scheme: dark) {
   :root {
     --primary: #2997ff;
-    --secondary: #f5f5f7;
-    --tertiary: #1d1d1f;
+    --primary-foreground: #ffffff;
     --background: #000000;
+    --foreground: #f5f5f7;
+    --surface: #1d1d1f;
+    --muted: #86868b;
+    --border: #424245;
+    --danger: #ff453a;
+    --success: #30d158;
   }
 }
 
 @layer base {
   body {
-    @apply bg-background font-sans text-secondary antialiased;
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+
+  /* Tailwind v4 quita el cursor pointer de los botones */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
+  /* Foco visible consistente (accesibilidad) */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+
+  ::selection {
+    @apply bg-primary/20;
   }
 }
